@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.neststay.dao.HomestayRentalDao">
+
+	<!-- 鍙牴鎹嚜宸辩殑闇€姹傦紝鏄惁瑕佷娇鐢?-->
+    <resultMap type="com.neststay.entity.HomestayRentalEntity" id="homestayRentalMap">
+        <result property="sourceType" column="source_type"/>
+        <result property="homestayId" column="homestay_id"/>
+        <result property="checkInDate" column="check_in_date"/>
+        <result property="checkOutDate" column="check_out_date"/>
+        <result property="guestCount" column="guest_count"/>
+        <result property="orderStatus" column="order_status"/>
+        <result property="orderNumber" column="order_number"/>
+        <result property="homestayName" column="homestay_name"/>
+        <result property="homestayImage" column="homestay_image"/>
+        <result property="homestayLocation" column="homestay_location"/>
+        <result property="homestayCategory" column="homestay_category"/>
+        <result property="pricePerDay" column="price_per_day"/>
+        <result property="bookingDays" column="booking_days"/>
+        <result property="totalPrice" column="total_price"/>
+        <result property="rentalTime" column="rental_time"/>
+        <result property="merchantAccount" column="merchant_account"/>
+        <result property="merchantName" column="merchant_name"/>
+        <result property="merchantPhone" column="merchant_phone"/>
+        <result property="account" column="account"/>
+        <result property="realName" column="real_name"/>
+        <result property="phone" column="phone"/>
+        <result property="approvalStatus" column="approval_status"/>
+        <result property="approvalReply" column="approval_reply"/>
+        <result property="isPaid" column="is_paid"/>
+        <result property="payDeadline" column="pay_deadline"/>
+    </resultMap>
+
+	<select id="selectListVO"
+		resultType="com.neststay.entity.vo.HomestayRentalVO" >
+		SELECT * FROM `homestay_rental`  hr         
+        ${ew.customSqlSegment}
+	</select>
+	
+	<select id="selectVO"
+		resultType="com.neststay.entity.vo.HomestayRentalVO" >
+		SELECT  hr.* FROM `homestay_rental`  hr 	
+ 		${ew.customSqlSegment}
+	</select>
+
+    <select id="selectListView"
+		resultType="com.neststay.entity.view.HomestayRentalView" >
+
+		SELECT  hr.* FROM `homestay_rental`  hr 	        
+        ${ew.customSqlSegment}
+	</select>
+	
+	<select id="selectView"
+		resultType="com.neststay.entity.view.HomestayRentalView" >
+		SELECT * FROM `homestay_rental`  hr ${ew.customSqlSegment}
+	</select>
+	
+
+    <select id="selectValue" resultType="map" >
+        SELECT ${params.xColumn}, ROUND(sum(${params.yColumn}),1) total FROM `homestay_rental`
+        ${ew.customSqlSegment}
+        group by ${params.xColumn}
+    </select>
+
+    <select id="selectTimeStatValue" resultType="map" >
+        <if test = 'params.timeStatType == "鏃?'>
+                SELECT DATE_FORMAT(${params.xColumn},'%Y-%m-%d') ${params.xColumn}, sum(${params.yColumn}) total FROM `homestay_rental`
+                ${ew.customSqlSegment}
+                group by DATE_FORMAT(${params.xColumn},'%Y-%m-%d')
+        </if>
+        <if test = 'params.timeStatType == "鏈?'>
+                SELECT DATE_FORMAT(${params.xColumn},'%Y-%m') ${params.xColumn}, sum(${params.yColumn}) total FROM `homestay_rental`
+                ${ew.customSqlSegment}
+                group by DATE_FORMAT(${params.xColumn},'%Y-%m')
+        </if>
+        <if test = 'params.timeStatType == "骞?'>
+                SELECT DATE_FORMAT(${params.xColumn},'%Y') ${params.xColumn}, sum(${params.yColumn}) total FROM `homestay_rental`
+                ${ew.customSqlSegment}
+                group by DATE_FORMAT(${params.xColumn},'%Y')
+        </if>
+    </select>
+
+    <select id="selectGroup" resultType="map" >
+        SELECT ${params.column} , count(1) total FROM `homestay_rental`
+        ${ew.customSqlSegment}
+        group by ${params.column}
+    </select>
+
+
+
+
+</mapper>

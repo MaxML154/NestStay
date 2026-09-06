@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.neststay.dao.ForumPostDao">
+
+	<!-- 鍙牴鎹嚜宸辩殑闇€姹傦紝鏄惁瑕佷娇鐢?-->
+    <resultMap type="com.neststay.entity.ForumPostEntity" id="forumMap">
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="username" column="username"/>
+        <result property="avatarUrl" column="avatar_url"/>
+        <result property="isDone" column="is_done"/>
+        <result property="isTop" column="is_top"/>
+        <result property="topTime" column="top_time"/>
+        <result property="auditStatus" column="audit_status"/>
+        <result property="authorRole" column="author_role"/>
+        <result property="authorLevel" column="author_level"/>
+    </resultMap>
+
+	<select id="selectListVO"
+		resultType="com.neststay.entity.vo.ForumPostVO" >
+		SELECT * FROM forum_post  forum         
+        ${ew.customSqlSegment}
+	</select>
+	
+	<select id="selectVO"
+		resultType="com.neststay.entity.vo.ForumPostVO" >
+		SELECT  forum.* FROM forum_post  forum 	
+ 		${ew.customSqlSegment}
+	</select>
+
+    <select id="selectListView"
+		resultType="com.neststay.entity.view.ForumPostView" >
+
+		SELECT  forum.* FROM forum_post  forum 	        
+        ${ew.customSqlSegment}
+	</select>
+	
+	<select id="selectView"
+		resultType="com.neststay.entity.view.ForumPostView" >
+		SELECT * FROM forum_post  forum ${ew.customSqlSegment}
+	</select>
+	
+
+
+</mapper>

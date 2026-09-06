@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 启动时间戳：用于生成独立日志文件 -->
+    <timestamp key="startup" datePattern="yyyy-MM-dd-HHmmss"/>
+
+    <!-- 控制台输出 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %cyan([%thread]) %magenta(%logger{36}) - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 文件输出：每次启动生成独立文件（启动时间戳保证唯一，无需滚动策略） -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/neststay-${startup}.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- SQL 日志（开发环境）：同时写入文件，便于排查列名/语法问题 -->
+    <logger name="com.neststay.dao" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </logger>
+
+    <logger name="com.neststay" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </logger>
+
+    <!-- Spring 框架日志 -->
+    <logger name="org.springframework" level="WARN" />
+    <logger name="org.springframework.security" level="INFO" />
+
+    <!-- MyBatis 日志 -->
+    <logger name="org.apache.ibatis" level="WARN" />
+
+    <!-- 根日志 -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>

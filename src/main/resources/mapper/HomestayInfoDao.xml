@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.neststay.dao.HomestayInfoDao">
+
+	<!-- 鍙牴鎹嚜宸辩殑闇€姹傦紝鏄惁瑕佷娇鐢?-->
+    <resultMap type="com.neststay.entity.view.HomestayInfoView" id="homestayInfoViewMap">
+        <id property="id" column="id"/>
+        <result property="name" column="display_name"/>
+        <result property="coverImage" column="cover_image"/>
+        <result property="city" column="city"/>
+        <result property="address" column="address"/>
+        <result property="originalPrice" column="original_price"/>
+        <result property="currentPrice" column="current_price"/>
+        <result property="qu" column="district"/>
+        <result property="rating" column="rating"/>
+        <result property="serviceTag" column="service_tag"/>
+        <result property="clickTime" column="click_time"/>
+        <result property="clickCount" column="click_count"/>
+        <result property="discussCount" column="discuss_count"/>
+        <result property="favoriteCount" column="favorite_count"/>
+        <result property="videoIntro" column="video_intro"/>
+        <result property="detailContent" column="detail_content"/>
+        <result property="auditStatus" column="audit_status"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+	<select id="selectListVO"
+		resultType="com.neststay.entity.vo.HomestayInfoVO" >
+		SELECT * FROM `homestay_info`  hi         
+        ${ew.customSqlSegment}
+	</select>
+	
+	<select id="selectVO"
+		resultType="com.neststay.entity.vo.HomestayInfoVO" >
+		SELECT  hi.* FROM `homestay_info`  hi 	
+ 		${ew.customSqlSegment}
+	</select>
+
+    <select id="selectListView"
+		resultMap="homestayInfoViewMap" >
+
+		SELECT  hi.* FROM `homestay_info`  hi 	        
+        ${ew.customSqlSegment}
+    </select>
+	
+	<select id="selectView"
+		resultMap="homestayInfoViewMap" >
+		SELECT * FROM `homestay_info`  hi ${ew.customSqlSegment}
+	</select>
+	
+
+    <select id="selectValue" resultType="map" >
+        SELECT ${params.xColumn}, ROUND(sum(${params.yColumn}),1) total FROM `homestay_info`
+        ${ew.customSqlSegment}
+        group by ${params.xColumn}
+    </select>
+
+    <select id="selectTimeStatValue" resultType="map" >
+        <if test = 'params.timeStatType == "鏃?'>
+                SELECT DATE_FORMAT(${params.xColumn},'%Y-%m-%d') ${params.xColumn}, sum(${params.yColumn}) total FROM `homestay_info`
+                ${ew.customSqlSegment}
+                group by DATE_FORMAT(${params.xColumn},'%Y-%m-%d')
+        </if>
+        <if test = 'params.timeStatType == "鏈?'>
+                SELECT DATE_FORMAT(${params.xColumn},'%Y-%m') ${params.xColumn}, sum(${params.yColumn}) total FROM `homestay_info`
+                ${ew.customSqlSegment}
+                group by DATE_FORMAT(${params.xColumn},'%Y-%m')
+        </if>
+        <if test = 'params.timeStatType == "骞?'>
+                SELECT DATE_FORMAT(${params.xColumn},'%Y') ${params.xColumn}, sum(${params.yColumn}) total FROM `homestay_info`
+                ${ew.customSqlSegment}
+                group by DATE_FORMAT(${params.xColumn},'%Y')
+        </if>
+    </select>
+
+    <select id="selectGroup" resultType="map" >
+        SELECT ${params.column} , count(1) total FROM `homestay_info`
+        ${ew.customSqlSegment}
+        group by ${params.column}
+    </select>
+
+
+
+
+</mapper>

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.neststay.dao.SysMenuDao">
+
+	<!-- 鍙牴鎹嚜宸辩殑闇€姹傦紝鏄惁瑕佷娇鐢?-->
+    <resultMap type="com.neststay.entity.SysMenuEntity" id="menuMap">
+        <result property="menuJson" column="menu_json"/>
+    </resultMap>
+
+	<select id="selectListVO"
+		resultType="com.neststay.entity.vo.SysMenuVO" >
+		SELECT * FROM sys_menu  menu         
+        ${ew.customSqlSegment}
+	</select>
+	
+	<select id="selectVO"
+		resultType="com.neststay.entity.vo.SysMenuVO" >
+		SELECT  menu.* FROM sys_menu  menu 	
+ 		${ew.customSqlSegment}
+	</select>
+
+    <select id="selectListView"
+		resultType="com.neststay.entity.view.SysMenuView" >
+
+		SELECT  menu.* FROM sys_menu  menu 	        
+        ${ew.customSqlSegment}
+	</select>
+	
+	<select id="selectView"
+		resultType="com.neststay.entity.view.SysMenuView" >
+		SELECT * FROM sys_menu  menu ${ew.customSqlSegment}
+	</select>
+	
+
+
+</mapper>

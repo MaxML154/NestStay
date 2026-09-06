@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.neststay.dao.NewsArticleDao">
+
+	<!-- 鍙牴鎹嚜宸辩殑闇€姹傦紝鏄惁瑕佷娇鐢?-->
+    <resultMap type="com.neststay.entity.NewsArticleEntity" id="newsMap">
+        <result property="title" column="title"/>
+        <result property="introduction" column="introduction"/>
+        <result property="typeName" column="type_name"/>
+        <result property="name" column="display_name"/>
+        <result property="headPortrait" column="head_portrait"/>
+        <result property="authorId" column="author_id"/>
+        <result property="authorRole" column="author_role"/>
+        <result property="clickCount" column="click_count"/>
+        <result property="clickTime" column="click_time"/>
+        <result property="thumbsUpCount" column="thumbs_up_count"/>
+        <result property="dislikeCount" column="dislike_count"/>
+        <result property="favoriteCount" column="favorite_count"/>
+        <result property="picture" column="picture"/>
+        <result property="content" column="content"/>
+    </resultMap>
+
+	<select id="selectListVO"
+		resultType="com.neststay.entity.vo.NewsArticleVO" >
+		SELECT * FROM news_article news ${ew.customSqlSegment}
+	</select>
+
+	<select id="selectVO"
+		resultType="com.neststay.entity.vo.NewsArticleVO" >
+		SELECT news.* FROM news_article news ${ew.customSqlSegment}
+	</select>
+
+    <select id="selectListView"
+		resultType="com.neststay.entity.view.NewsArticleView" >
+		SELECT news.* FROM news_article news ${ew.customSqlSegment}
+	</select>
+
+	<select id="selectView"
+		resultType="com.neststay.entity.view.NewsArticleView" >
+		SELECT * FROM news_article news ${ew.customSqlSegment}
+	</select>
+	
+
+
+</mapper>

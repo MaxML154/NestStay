@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.neststay.dao.ChatHelperDao">
+
+	<!-- 鍙牴鎹嚜宸辩殑闇€姹傦紝鏄惁瑕佷娇鐢?-->
+    <resultMap type="com.neststay.entity.ChatHelperEntity" id="chatHelperMap">
+        <result property="ask" column="ask"/>
+        <result property="reply" column="reply"/>
+    </resultMap>
+
+	<select id="selectListVO"
+		resultType="com.neststay.entity.vo.ChatHelperVO" >
+		SELECT * FROM `chat_helper`  chathelper         
+        ${ew.customSqlSegment}
+	</select>
+	
+	<select id="selectVO"
+		resultType="com.neststay.entity.vo.ChatHelperVO" >
+		SELECT  chathelper.* FROM `chat_helper`  chathelper 	
+ 		${ew.customSqlSegment}
+	</select>
+
+    <select id="selectListView"
+		resultType="com.neststay.entity.view.ChatHelperView" >
+
+		SELECT  chathelper.* FROM `chat_helper`  chathelper 	        
+        ${ew.customSqlSegment}
+	</select>
+	
+	<select id="selectView"
+		resultType="com.neststay.entity.view.ChatHelperView" >
+		SELECT * FROM `chat_helper`  chathelper ${ew.customSqlSegment}
+	</select>
+	
+
+
+</mapper>

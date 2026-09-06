@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.neststay.dao.PlatformViewDao">
+
+	<!-- 鍙牴鎹嚜宸辩殑闇€姹傦紝鏄惁瑕佷娇鐢?-->
+    <resultMap type="com.neststay.entity.PlatformViewEntity" id="platformViewMap">
+        <result property="homestayName" column="homestay_name"/>
+        <result property="homestayCategory" column="homestay_category"/>
+        <result property="pricePerDay" column="price_per_day"/>
+        <result property="layout" column="layout"/>
+        <result property="homestayCount" column="homestay_count"/>
+        <result property="propertyIntro" column="property_intro"/>
+        <result property="propertyFeatures" column="property_features"/>
+        <result property="homestayLocation" column="homestay_location"/>
+        <result property="merchantAccount" column="merchant_account"/>
+        <result property="merchantName" column="merchant_name"/>
+        <result property="merchantPhone" column="merchant_phone"/>
+        <result property="homestayImage" column="homestay_image"/>
+        <result property="videoIntro" column="video_intro"/>
+        <result property="auditStatus" column="audit_status"/>
+        <result property="clickTime" column="click_time"/>
+        <result property="clickCount" column="click_count"/>
+        <result property="favoriteCount" column="favorite_count"/>
+    </resultMap>
+
+	<select id="selectListVO"
+		resultType="com.neststay.entity.vo.PlatformViewVO" >
+		SELECT * FROM `platform_view`  pv         
+        ${ew.customSqlSegment}
+	</select>
+	
+	<select id="selectVO"
+		resultType="com.neststay.entity.vo.PlatformViewVO" >
+		SELECT  pv.* FROM `platform_view`  pv 	
+ 		${ew.customSqlSegment}
+	</select>
+
+    <select id="selectListView"
+		resultType="com.neststay.entity.view.PlatformViewView" >
+
+		SELECT  pv.* FROM `platform_view`  pv 	        
+        ${ew.customSqlSegment}
+	</select>
+	
+	<select id="selectView"
+		resultType="com.neststay.entity.view.PlatformViewView" >
+		SELECT * FROM `platform_view`  pv ${ew.customSqlSegment}
+	</select>
+	
+
+    <select id="selectValue" resultType="map" >
+        SELECT ${params.xColumn}, ROUND(sum(${params.yColumn}),1) total FROM `platform_view`
+        ${ew.customSqlSegment}
+        group by ${params.xColumn}
+    </select>
+
+    <select id="selectTimeStatValue" resultType="map" >
+        <if test = 'params.timeStatType == "鏃?'>
+                SELECT DATE_FORMAT(${params.xColumn},'%Y-%m-%d') ${params.xColumn}, sum(${params.yColumn}) total FROM `platform_view`
+                ${ew.customSqlSegment}
+                group by DATE_FORMAT(${params.xColumn},'%Y-%m-%d')
+        </if>
+        <if test = 'params.timeStatType == "鏈?'>
+                SELECT DATE_FORMAT(${params.xColumn},'%Y-%m') ${params.xColumn}, sum(${params.yColumn}) total FROM `platform_view`
+                ${ew.customSqlSegment}
+                group by DATE_FORMAT(${params.xColumn},'%Y-%m')
+        </if>
+        <if test = 'params.timeStatType == "骞?'>
+                SELECT DATE_FORMAT(${params.xColumn},'%Y') ${params.xColumn}, sum(${params.yColumn}) total FROM `platform_view`
+                ${ew.customSqlSegment}
+                group by DATE_FORMAT(${params.xColumn},'%Y')
+        </if>
+    </select>
+
+    <select id="selectGroup" resultType="map" >
+        SELECT ${params.column} , count(1) total FROM `platform_view`
+        ${ew.customSqlSegment}
+        group by ${params.column}
+    </select>
+
+
+
+
+</mapper>

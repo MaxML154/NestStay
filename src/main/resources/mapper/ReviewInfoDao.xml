@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.neststay.dao.ReviewInfoDao">
+
+	<!-- 鍙牴鎹嚜宸辩殑闇€姹傦紝鏄惁瑕佷娇鐢?-->
+    <resultMap type="com.neststay.entity.ReviewInfoEntity" id="reviewInfoMap">
+        <result property="orderNumber" column="order_number"/>
+        <result property="homestayName" column="homestay_name"/>
+        <result property="homestayImage" column="homestay_image"/>
+        <result property="creditScore" column="credit_score"/>
+        <result property="reviewContent" column="review_content"/>
+        <result property="reviewTime" column="review_time"/>
+        <result property="merchantAccount" column="merchant_account"/>
+        <result property="merchantName" column="merchant_name"/>
+        <result property="merchantPhone" column="merchant_phone"/>
+        <result property="account" column="account"/>
+        <result property="realName" column="real_name"/>
+        <result property="phone" column="phone"/>
+        <result property="crossUserId" column="cross_user_id"/>
+        <result property="crossRefId" column="cross_ref_id"/>
+    </resultMap>
+
+	<select id="selectListVO"
+		resultType="com.neststay.entity.vo.ReviewInfoVO" >
+		SELECT * FROM `review_info`  ri         
+        ${ew.customSqlSegment}
+	</select>
+	
+	<select id="selectVO"
+		resultType="com.neststay.entity.vo.ReviewInfoVO" >
+		SELECT  ri.* FROM `review_info`  ri 	
+ 		${ew.customSqlSegment}
+	</select>
+
+    <select id="selectListView"
+		resultType="com.neststay.entity.view.ReviewInfoView" >
+
+		SELECT  ri.* FROM `review_info`  ri 	        
+        ${ew.customSqlSegment}
+	</select>
+	
+	<select id="selectView"
+		resultType="com.neststay.entity.view.ReviewInfoView" >
+		SELECT * FROM `review_info`  ri ${ew.customSqlSegment}
+	</select>
+	
+
+
+</mapper>

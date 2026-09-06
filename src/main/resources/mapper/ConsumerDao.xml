@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.neststay.dao.ConsumerDao">
+
+	<!-- 鍙牴鎹嚜宸辩殑闇€姹傦紝鏄惁瑕佷娇鐢?-->
+    <resultMap type="com.neststay.entity.ConsumerEntity" id="consumerMap">
+        <result property="account" column="account"/>
+        <result property="passwordHash" column="password_hash"/>
+        <result property="nickname" column="nickname"/>
+        <result property="realName" column="real_name"/>
+        <result property="bio" column="bio"/>
+        <result property="profileCover" column="profile_cover"/>
+        <result property="profileCoverType" column="profile_cover_type"/>
+        <result property="privacyPosts" column="privacy_posts"/>
+        <result property="privacyArticles" column="privacy_articles"/>
+        <result property="privacyFavorites" column="privacy_favorites"/>
+        <result property="gender" column="gender"/>
+        <result property="avatar" column="avatar"/>
+        <result property="phone" column="phone"/>
+        <result property="idNumber" column="id_number"/>
+        <result property="idCardFront" column="id_card_front"/>
+        <result property="idCardBack" column="id_card_back"/>
+    </resultMap>
+
+	<select id="selectListVO"
+		resultType="com.neststay.entity.vo.ConsumerVO" >
+		SELECT * FROM `consumer`  c         
+        ${ew.customSqlSegment}
+	</select>
+	
+	<select id="selectVO"
+		resultType="com.neststay.entity.vo.ConsumerVO" >
+		SELECT  c.* FROM `consumer`  c 	
+ 		${ew.customSqlSegment}
+	</select>
+
+    <select id="selectListView"
+		resultType="com.neststay.entity.view.ConsumerView" >
+
+		SELECT  c.* FROM `consumer`  c 	        
+        ${ew.customSqlSegment}
+	</select>
+	
+	<select id="selectView"
+		resultType="com.neststay.entity.view.ConsumerView" >
+		SELECT * FROM `consumer`  c ${ew.customSqlSegment}
+	</select>
+	
+
+
+</mapper>

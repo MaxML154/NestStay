@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.neststay.dao.OnlineInquiryDao">
+
+	<!-- 鍙牴鎹嚜宸辩殑闇€姹傦紝鏄惁瑕佷娇鐢?-->
+    <resultMap type="com.neststay.entity.OnlineInquiryEntity" id="onlineInquiryMap">
+        <result property="homestayName" column="homestay_name"/>
+        <result property="image" column="image_url"/>
+        <result property="video" column="video_url"/>
+        <result property="contentDetail" column="content_detail"/>
+        <result property="communicationTime" column="communication_time"/>
+        <result property="merchantAccount" column="merchant_account"/>
+        <result property="merchantName" column="merchant_name"/>
+        <result property="account" column="account"/>
+        <result property="realName" column="real_name"/>
+    </resultMap>
+
+	<select id="selectListVO"
+		resultType="com.neststay.entity.vo.OnlineInquiryVO" >
+		SELECT * FROM `online_inquiry`  oi         
+        ${ew.customSqlSegment}
+	</select>
+	
+	<select id="selectVO"
+		resultType="com.neststay.entity.vo.OnlineInquiryVO" >
+		SELECT  oi.* FROM `online_inquiry`  oi 	
+ 		${ew.customSqlSegment}
+	</select>
+
+    <select id="selectListView"
+		resultType="com.neststay.entity.view.OnlineInquiryView" >
+
+		SELECT  oi.* FROM `online_inquiry`  oi 	        
+        ${ew.customSqlSegment}
+	</select>
+	
+	<select id="selectView"
+		resultType="com.neststay.entity.view.OnlineInquiryView" >
+		SELECT * FROM `online_inquiry`  oi ${ew.customSqlSegment}
+	</select>
+	
+
+
+</mapper>
