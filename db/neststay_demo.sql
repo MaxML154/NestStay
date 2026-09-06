@@ -1,0 +1,15 @@
+-- NestStay-Shell demo database bootstrap
+--
+-- This preview project uses database `neststay_demo` (not `neststay`).
+-- Run one of the init scripts instead of importing this file directly:
+--
+--   Windows:  db\init_demo.bat
+--   Linux:    bash db/init_demo.sh
+--
+-- The scripts will:
+--   1. CREATE DATABASE neststay_demo
+--   2. Load schema/data from ../NestStay/db/neststay.sql (renamed)
+--   3. Apply ../NestStay/db/migrate_*.sql
+--   4. Apply neststay_demo_seed.sql (optional tweaks)
+--
+-- Default admin: admin / admin
